@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Citas Programadas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Citas Programadas</h1>
+        <table id="appointments-table" border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Servicio</th>
+                    <th>Correo</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se insertarán las citas -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Carga las citas desde el localStorage
+        const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+        const tableBody = document.getElementById("appointments-table").querySelector("tbody");
+
+        if (appointments.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='5'>No hay citas programadas.</td></tr>";
+        } else {
+            appointments.forEach((appointment) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${appointment.name}</td>
+                    <td>${appointment.service}</td>
+                    <td>${appointment.contact}</td>
+                    <td>${appointment.date}</td>
+                    <td>${appointment.time}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
