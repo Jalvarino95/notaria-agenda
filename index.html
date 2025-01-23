@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Citas Notaría</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Cargar la biblioteca de EmailJS -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Agenda tu Cita en la Notaría</h1>
+
+        <!-- Formulario de cita -->
+        <form id="appointment-form">
+            <div>
+                <label for="name">Nombre Completo:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div>
+                <label for="service">Tipo de Trámite:</label>
+                <select id="service" required>
+                    <option value="Inmigración">Inmigración</option>
+                    <option value="Taxes">Taxes</option>
+                    <option value="Compañía">Compañía</option>
+                </select>
+            </div>
+            <div>
+                <label for="contact">Correo Electrónico:</label>
+                <input type="email" id="contact" required>
+            </div>
+            <div>
+                <label for="date">Fecha:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div>
+                <label for="time">Hora:</label>
+                <select id="time" required>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="10:30">10:30 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="11:30">11:30 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="12:30">12:30 PM</option>
+                    <option value="01:00">01:00 PM</option>
+                    <option value="01:30">01:30 PM</option>
+                    <option value="02:00">02:00 PM</option>
+                    <option value="02:30">02:30 PM</option>
+                    <option value="03:00">03:00 PM</option>
+                    <option value="03:30">03:30 PM</option>
+                    <option value="04:00">04:00 PM</option>
+                </select>
+            </div>
+            <button type="submit">Agendar Cita</button>
+        </form>
+
+        <!-- Mensaje de éxito -->
+        <div id="success-message" style="display:none;">
+            <p>Cita agendada exitosamente.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
