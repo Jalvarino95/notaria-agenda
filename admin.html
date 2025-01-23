@@ -3,48 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Citas Programadas</title>
+    <title>Panel Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Citas Programadas</h1>
-        <table id="appointments-table" border="1">
-            <thead>
+    <div class="container mt-5">
+        <h1 class="mb-4">Panel Administrativo - Gestión de Citas</h1>
+
+        <!-- Filtros -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="filter-date" class="form-label">Filtrar por Fecha:</label>
+                <input type="date" id="filter-date" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label for="filter-service" class="form-label">Filtrar por Servicio:</label>
+                <select id="filter-service" class="form-control">
+                    <option value="">Todos los servicios</option>
+                    <option value="Inmigración">Inmigración</option>
+                    <option value="Taxes">Taxes</option>
+                    <option value="Compañía">Compañía</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button id="apply-filters" class="btn btn-primary w-100">Aplicar Filtros</button>
+            </div>
+        </div>
+
+        <!-- Tabla de citas -->
+        <table class="table table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th>Nombre</th>
                     <th>Servicio</th>
                     <th>Correo</th>
                     <th>Fecha</th>
                     <th>Hora</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Aquí se insertarán las citas -->
+            <tbody id="appointments-table">
+                <!-- Las filas de citas se llenarán dinámicamente -->
             </tbody>
         </table>
     </div>
 
-    <script>
-        // Carga las citas desde el localStorage
-        const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
-        const tableBody = document.getElementById("appointments-table").querySelector("tbody");
-
-        if (appointments.length === 0) {
-            tableBody.innerHTML = "<tr><td colspan='5'>No hay citas programadas.</td></tr>";
-        } else {
-            appointments.forEach((appointment) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${appointment.name}</td>
-                    <td>${appointment.service}</td>
-                    <td>${appointment.contact}</td>
-                    <td>${appointment.date}</td>
-                    <td>${appointment.time}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-    </script>
+    <script src="admin.js"></script>
 </body>
 </html>
+
