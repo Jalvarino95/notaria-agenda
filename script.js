@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
         emailjs.init("OkKCaiZOuHvmgUBLf"); 
     emailjs.send("service_kzfceqn", "appointment_confirmation", {
         name: appointment.name,
-        phone: appointment.phone,
         service: appointment.service,
         contact: appointment.contact,
         date: appointment.date,
