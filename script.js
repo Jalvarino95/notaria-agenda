@@ -2,57 +2,56 @@ document.addEventListener("DOMContentLoaded", function () {
     // Inicializa EmailJS
     emailjs.init("OkKCaiZOuHvmgUBLf");
 
-    const dateInput = document.getElementById("date");
     const timeInput = document.getElementById("time");
 
-    // Configura el atributo "min" para evitar fechas pasadas
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    const todayString = `${yyyy}-${mm}-${dd}`;
-    dateInput.setAttribute("min", todayString);
+    // Cargar citas del Local Storage
+    const getAppointments = () => JSON.parse(localStorage.getItem("appointments")) || [];
 
-    // Bloquear domingos y días sin horarios disponibles
-    function disableInvalidDates() {
-        const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
-
+    // Bloquear domingos y fechas sin horarios disponibles
+    const disableDates = () => {
+        const appointments = getAppointments();
         const unavailableDates = new Set();
+
+        // Recolectar fechas completamente ocupadas
+        const allTimes = [
+            "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+            "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00",
+        ];
+
         appointments.forEach(app => {
-            const bookedTimes = appointments.filter(a => a.date === app.date).map(a => a.time);
-            if (bookedTimes.length === timeInput.options.length) {
+            const bookedTimes = appointments
+                .filter(a => a.date === app.date)
+                .map(a => a.time);
+
+            if (bookedTimes.length === allTimes.length) {
                 unavailableDates.add(app.date);
             }
         });
 
-        // Desactivar dinámicamente domingos y días sin citas
-        dateInput.addEventListener("input", function () {
-            const selectedDate = new Date(dateInput.value);
+        return [...unavailableDates];
+    };
 
-            // Bloquear domingos
-            if (selectedDate.getDay() === 0) {
-                alert("No se pueden seleccionar domingos. Por favor, elige otra fecha.");
-                dateInput.value = ""; // Resetea si selecciona domingo
-                return;
-            }
-
-            // Bloquear días sin horarios disponibles
-            if (unavailableDates.has(dateInput.value)) {
-                alert("Este día ya no tiene horarios disponibles. Por favor, elige otra fecha.");
-                dateInput.value = ""; // Resetea si el día está completo
-            }
-        });
-    }
+    // Configuración de Flatpickr
+    flatpickr("#date", {
+        minDate: "today",
+        disable: [
+            function (date) {
+                // Bloquear domingos
+                return date.getDay() === 0;
+            },
+            ...disableDates(), // Bloquear fechas sin horarios disponibles
+        ],
+        onChange: updateAvailableTimes, // Actualizar horas disponibles al cambiar de fecha
+    });
 
     // Actualizar las horas disponibles para la fecha seleccionada
-    function updateAvailableTimes() {
-        const selectedDate = dateInput.value;
-        const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+    function updateAvailableTimes(selectedDates, dateStr) {
+        const appointments = getAppointments();
         const bookedTimes = appointments
-            .filter(app => app.date === selectedDate)
+            .filter(app => app.date === dateStr)
             .map(app => app.time);
 
-        // Reiniciar las opciones del selector de horas
+        // Limpiar y actualizar las opciones del selector de hora
         timeInput.innerHTML = `
             <option value="10:00">10:00 AM</option>
             <option value="10:30">10:30 AM</option>
@@ -69,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <option value="04:00">04:00 PM</option>
         `;
 
-        // Deshabilitar las horas ya reservadas
         Array.from(timeInput.options).forEach(option => {
             if (bookedTimes.includes(option.value)) {
                 option.disabled = true;
@@ -94,8 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const appointment = { name, service, contact, date, time };
 
-        // Verificar si ya existe la cita para esa fecha y hora
-        let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+        // Verificar duplicados
+        const appointments = getAppointments();
         const isDuplicate = appointments.some(
             app => app.date === date && app.time === time
         );
@@ -112,10 +110,18 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(`Cita agendada exitosamente.\nDetalles:\nNombre: ${name}\nServicio: ${service}\nFecha: ${date}\nHora: ${time}`);
         document.getElementById("appointment-form").reset();
 
-        updateAvailableTimes(); // Actualizar las horas disponibles
-        disableInvalidDates(); // Bloquear días completos si es necesario
-    });
+        // Actualizar Flatpickr y las horas disponibles
+        flatpickr("#date", {
+            minDate: "today",
+            disable: [
+                function (date) {
+                    return date.getDay() === 0;
+                },
+                ...disableDates(),
+            ],
+        });
 
-    disableInvalidDates(); // Ejecutar al cargar la página
+        updateAvailableTimes(null, date);
+    });
 });
 
