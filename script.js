@@ -57,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Inicializar EmailJS
+    emailjs.init("OkKCaiZOuHvmgUBLf");
+
     // Manejo del formulario
     document.getElementById("appointment-form").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -93,13 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
         updateAvailableTimes(date);
 
          // Enviar correo de confirmación usando EmailJS
-        emailjs.init("OkKCaiZOuHvmgUBLf"); 
-    emailjs.send("service_kzfceqn", "appointment_confirmation", {
-        name: "Juan Pérez",
-    service: "Asesoría Legal",
-    date: "2025-01-25",
-    time: "10:30",
-    contact: "jalvarino95@icloud.com"
+            emailjs.send("service_kzfceqn", "appointment_confirmation", {
+            name: appointment.name,
+            service: appointment.service,
+            contact: appointment.contact,
+            date: appointment.date,
+            time: appointment.time,
     }).then(
         function (response) {
             console.log("Correo enviado exitosamente:", response.status, response.text);
