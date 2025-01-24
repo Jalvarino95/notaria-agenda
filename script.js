@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateAvailableTimes(date);
 
          // Enviar correo de confirmación usando EmailJS
+        emailjs.init("OkKCaiZOuHvmgUBLf"); 
     emailjs.send("service_kzfceqn", "appointment_confirmation", {
         name: appointment.name,
         phone: appointment.phone,
@@ -102,10 +103,14 @@ document.addEventListener("DOMContentLoaded", function () {
         time: appointment.time,
     }).then(
         function (response) {
-            alert("Cita agendada y correo enviado exitosamente.");
+            console.log("Correo enviado exitosamente:", response.status, response.text);
+                alert("Cita agendada y correo enviado exitosamente.");
         },
         function (error) {
             alert("Ocurrió un error al enviar el correo: " + error.text);
+            console.error("Error al enviar el correo:", error);
+                alert("Ocurrió un error al enviar el correo: " + error.text);
+            
         }
     );
 
