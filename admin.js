@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${appointment.name}</td>
+                <td>${appointment.phone}</td>
                 <td>${appointment.service}</td>
                 <td>${appointment.contact}</td>
                 <td>${appointment.date}</td>
