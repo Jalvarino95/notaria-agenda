@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda de Citas Notaría</title>
+    <title>Agenda de Citas - Notaría Tania Gaines</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Cargar la biblioteca de EmailJS -->
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <!-- Flatpickr CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<!-- Flatpickr JS -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    <!-- Flatpickr para el calendario -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <div class="container">
@@ -36,25 +31,17 @@
                 <input type="email" id="contact" required>
             </div>
             <div>
+                <label for="phone">Número de Teléfono:</label>
+                <input type="tel" id="phone" pattern="[0-9]{10}" required placeholder="Ejemplo: 1234567890">
+            </div>
+            <div>
                 <label for="date">Fecha:</label>
-                <input type="date" id="date" required>
+                <input type="text" id="date" required>
             </div>
             <div>
                 <label for="time">Hora:</label>
                 <select id="time" required>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="10:30">10:30 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="11:30">11:30 AM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="12:30">12:30 PM</option>
-                    <option value="01:00">01:00 PM</option>
-                    <option value="01:30">01:30 PM</option>
-                    <option value="02:00">02:00 PM</option>
-                    <option value="02:30">02:30 PM</option>
-                    <option value="03:00">03:00 PM</option>
-                    <option value="03:30">03:30 PM</option>
-                    <option value="04:00">04:00 PM</option>
+                    <!-- Opciones de horas -->
                 </select>
             </div>
             <button type="submit">Agendar Cita</button>
@@ -66,6 +53,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
 </body>
 </html>
