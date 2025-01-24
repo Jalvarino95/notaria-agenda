@@ -92,4 +92,3 @@ document.addEventListener("DOMContentLoaded", function () {
         updateAvailableTimes(date);
     });
 });
-
