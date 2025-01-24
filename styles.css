@@ -1,17 +1,67 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f9f9f9;
-    color: #333;
-}
+<style>
+    /* Asegúrate de que la página ocupe todo el viewport */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f9f9f9; /* Fondo claro para mejor visibilidad */
+        font-family: Arial, sans-serif;
+    }
 
-h1 {
-    text-align: center;
-    color: #007BFF;
-}
+    /* Contenedor principal centrado */
+    .center-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%; /* Se adapta a dispositivos pequeños */
+    }
 
-p {
-    text-align: center;
-    font-size: 18px;
-}
+    /* Estilo de los campos y botones */
+    form div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input, button {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Para pantallas pequeñas */
+    @media (max-width: 600px) {
+        .center-container {
+            padding: 15px;
+        }
+
+        input, button {
+            font-size: 14px;
+            padding: 8px;
+        }
+    }
+</style>
