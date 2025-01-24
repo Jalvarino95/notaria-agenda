@@ -82,15 +82,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const name = document.getElementById("name").value;
         const service = document.getElementById("service").value;
         const contact = document.getElementById("contact").value;
+        const phone = document.getElementById("phone").value;
         const date = document.getElementById("date").value;
         const time = document.getElementById("time").value;
 
-        if (!name || !service || !contact || !date || !time) {
+        if (!name || !service || !contact || !phone || !date || !time) {
             alert("Por favor, completa todos los campos.");
             return;
         }
 
-        const appointment = { name, service, contact, date, time };
+        const appointment = { name, service, contact, phone, date, time };
 
         // Verificar duplicados
         const appointments = getAppointments();
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         appointments.push(appointment);
         localStorage.setItem("appointments", JSON.stringify(appointments));
 
-        alert(`Cita agendada exitosamente.\nDetalles:\nNombre: ${name}\nServicio: ${service}\nFecha: ${date}\nHora: ${time}`);
+        alert(`Cita agendada exitosamente.\nDetalles:\nNombre: ${name}\nTeléfono: ${phone}\nServicio: ${service}\nFecha: ${date}\nHora: ${time}`);
         document.getElementById("appointment-form").reset();
 
         // Actualizar Flatpickr y las horas disponibles
