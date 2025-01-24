@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () { 
+document.addEventListener("DOMContentLoaded", function () {
     // Inicializar Flatpickr para la fecha
     const dateInput = document.getElementById("date");
     flatpickr(dateInput, {
@@ -57,16 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Inicializar EmailJS
-    emailjs.init("OkKCaiZOuHvmgUBLf");
-
     // Manejo del formulario
     document.getElementById("appointment-form").addEventListener("submit", function (e) {
         e.preventDefault();
 
         const name = document.getElementById("name").value;
         const phone = document.getElementById("phone").value;
-        const contact = document.getElementById("contact").value; // Correo que el usuario introduce
+        const contact = document.getElementById("contact").value;
         const service = document.getElementById("service").value;
         const date = document.getElementById("date").value;
         const time = document.getElementById("time").value;
@@ -93,29 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Actualizar las horas disponibles después de agendar
         updateAvailableTimes(date);
-
-        // Enviar correo de confirmación usando EmailJS
-        emailjs.send("service_kzfceqn", "appointment_confirmation", {
-            name: appointment.name,
-            service: appointment.service,
-            contact: appointment.contact, // El correo de contacto
-            date: appointment.date,
-            time: appointment.time,
-        }).then(
-            function (response) {
-                console.log("Correo enviado exitosamente:", response.status, response.text);
-                alert("Cita agendada y correo enviado exitosamente.");
-            },
-            function (error) {
-                console.error("Error al enviar el correo:", error);
-                alert("Ocurrió un error al enviar el correo: " + error.text);
-            }
-        );
-
-        // Reiniciar el formulario
-        document.getElementById("appointment-form").reset();
     });
 });
-
 
 
