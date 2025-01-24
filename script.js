@@ -95,11 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
          // Enviar correo de confirmación usando EmailJS
         emailjs.init("OkKCaiZOuHvmgUBLf"); 
     emailjs.send("service_kzfceqn", "appointment_confirmation", {
-        name: appointment.name,
-        service: appointment.service,
-        contact: appointment.contact,
-        date: appointment.date,
-        time: appointment.time,
+        name: "Juan Pérez",
+    service: "Asesoría Legal",
+    date: "2025-01-25",
+    time: "10:30",
+    contact: "jalvarino95@icloud.com"
     }).then(
         function (response) {
             console.log("Correo enviado exitosamente:", response.status, response.text);
