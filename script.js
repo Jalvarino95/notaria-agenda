@@ -84,11 +84,32 @@ document.addEventListener("DOMContentLoaded", function () {
         let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
         appointments.push(appointment);
         localStorage.setItem("appointments", JSON.stringify(appointments));
+        
 
         alert(`Cita agendada exitosamente.\nDetalles:\nNombre: ${name}\nTeléfono: ${phone}\nCorreo: ${contact}\nServicio: ${service}\nFecha: ${date}\nHora: ${time}`);
         document.getElementById("appointment-form").reset();
 
         // Actualizar las horas disponibles después de agendar
         updateAvailableTimes(date);
+
+         // Enviar correo de confirmación usando EmailJS
+    emailjs.send("service_id", "appointment_confirmation", {
+        name: appointment.name,
+        phone: appointment.phone,
+        service: appointment.service,
+        contact: appointment.contact,
+        date: appointment.date,
+        time: appointment.time,
+    }).then(
+        function (response) {
+            alert("Cita agendada y correo enviado exitosamente.");
+        },
+        function (error) {
+            alert("Ocurrió un error al enviar el correo: " + error.text);
+        }
+    );
+
+    // Reiniciar el formulario
+    document.getElementById("appointment-form").reset();
     });
 });
