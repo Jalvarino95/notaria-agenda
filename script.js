@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () { 
     // Inicializar Flatpickr para la fecha
     const dateInput = document.getElementById("date");
     flatpickr(dateInput, {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const name = document.getElementById("name").value;
         const phone = document.getElementById("phone").value;
-        const contact = document.getElementById("contact").value;
+        const contact = document.getElementById("contact").value; // Correo que el usuario introduce
         const service = document.getElementById("service").value;
         const date = document.getElementById("date").value;
         const time = document.getElementById("time").value;
@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
         appointments.push(appointment);
         localStorage.setItem("appointments", JSON.stringify(appointments));
-        
 
         alert(`Cita agendada exitosamente.\nDetalles:\nNombre: ${name}\nTeléfono: ${phone}\nCorreo: ${contact}\nServicio: ${service}\nFecha: ${date}\nHora: ${time}`);
         document.getElementById("appointment-form").reset();
@@ -95,27 +94,26 @@ document.addEventListener("DOMContentLoaded", function () {
         // Actualizar las horas disponibles después de agendar
         updateAvailableTimes(date);
 
-         // Enviar correo de confirmación usando EmailJS
-            emailjs.send("service_kzfceqn", "appointment_confirmation", {
+        // Enviar correo de confirmación usando EmailJS
+        emailjs.send("service_kzfceqn", "appointment_confirmation", {
             name: appointment.name,
             service: appointment.service,
-            contact: appointment.contact,
+            contact: appointment.contact, // El correo de contacto
             date: appointment.date,
             time: appointment.time,
-    }).then(
-        function (response) {
-            console.log("Correo enviado exitosamente:", response.status, response.text);
+        }).then(
+            function (response) {
+                console.log("Correo enviado exitosamente:", response.status, response.text);
                 alert("Cita agendada y correo enviado exitosamente.");
-        },
-        function (error) {
-            alert("Ocurrió un error al enviar el correo: " + error.text);
-            console.error("Error al enviar el correo:", error);
+            },
+            function (error) {
                 alert("Ocurrió un error al enviar el correo: " + error.text);
-            
-        }
-    );
+                console.error("Error al enviar el correo:", error);
+            }
+        );
 
-    // Reiniciar el formulario
-    document.getElementById("appointment-form").reset();
+        // Reiniciar el formulario
+        document.getElementById("appointment-form").reset();
     });
 });
+
