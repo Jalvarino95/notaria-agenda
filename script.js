@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateAvailableTimes(date);
 
          // Enviar correo de confirmación usando EmailJS
-    emailjs.send("service_id", "appointment_confirmation", {
+    emailjs.send("service_kzfceqn", "appointment_confirmation", {
         name: appointment.name,
         phone: appointment.phone,
         service: appointment.service,
