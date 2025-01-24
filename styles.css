@@ -12,7 +12,7 @@
     }
 
     /* Estilo del encabezado */
-    #title {
+    #header-title {
         color: #007bff; /* Azul */
         text-align: center; /* Opcional: Centrar el texto */
         margin-bottom: 20px; /* Espaciado debajo del título */
