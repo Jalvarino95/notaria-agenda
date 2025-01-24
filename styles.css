@@ -11,15 +11,7 @@
         font-family: Arial, sans-serif;
     }
 
-    /* Estilo del encabezado */
-    #header-title {
-        color: #007bff; /* Azul */
-        text-align: center; /* Opcional: Centrar el texto */
-        margin-bottom: 20px; /* Espaciado debajo del título */
-        font-size: 24px; /* Ajustar tamaño del texto */
-    }
-
-    /* Contenedor principal centrado */
+     /* Contenedor principal centrado */
     .center-container {
         background: #fff;
         padding: 20px;
