@@ -107,8 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Cita agendada y correo enviado exitosamente.");
             },
             function (error) {
-                alert("Ocurrió un error al enviar el correo: " + error.text);
                 console.error("Error al enviar el correo:", error);
+                alert("Ocurrió un error al enviar el correo: " + error.text);
             }
         );
 
@@ -116,4 +116,5 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("appointment-form").reset();
     });
 });
+
 
